@@ -2,32 +2,26 @@
 include('config/config.php');
 
 if(isset($_POST['submit'])){
-  $username = $_POST['username'];
-  $password = md5($_POST['password']);
-
-  if(empty($username)){
-    echo  "<script>alert('Tolong di isi username')</script>";
-    echo "<meta http-equiv='refresh' content='1 url=index.php'>";
-    exit();
-  }else if(empty($password)){
-    echo  "<script>alert('Tolong di isi password')</script>";
-    echo "<meta http-equiv='refresh' content='1 url=index.php'>";
-    exit();
-  }else{
-    $login    = mysqli_query($conn, 
-                "SELECT * FROM tb_admin 
-                WHERE username='$username' AND 
-                password='$password'");
-    if(mysqli_num_rows($login) > 0 ){
-      $_SESSION['username'] = $username;
-      echo  "<script>window.location.href='admin/index.html'</script>";
+    $username   = $_POST['username'];
+    $email      = $_POST['email'];
+    $password   = $_POST['password'];
+    $check      = mysqli_query($conn, 
+                                "SELECT * FROM tb_admin
+                                WHERE username='$username' OR
+                                email='$email'");
+    if(mysqli_num_rows($check) > 0){
+        echo   "<script>alert('Data ini sudah ada')</script>";
     }else{
-      echo  "<script>alert('Password salah')</script>";
-      echo "<meta http-equiv='refresh' content='1 url=index.php'>";
-      exit();
+        if($password){
+            $query  = "INSERT INTO tb_admin
+                        VALUES ('','$username', '$email', MD5('$password'))";
+            $result = mysqli_query($conn, $query);
+            echo "<script>window.location.href='index.php'";
+            echo "<script>alert('Data berhasil diupdate')</script>";
+        }else{
+            echo "<script>alert('Data gagal terisi!')</script>";
+        }
     }
-  }
-
 }
 
 ?>
@@ -52,10 +46,10 @@ if(isset($_POST['submit'])){
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="../../index2.html" class="h1"><b>Laboratorium</br>FMIPA</a>
+      <a href="../../index2.html" class="h1"><b>Pendaftaran Lab</br>FMIPA</a>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Masuk untuk memulai</p>
+      <p class="login-box-msg">Daftar dahulu untuk masuk</p>
 
       <form action="" method="post">
         <div class="input-group mb-3">
@@ -63,6 +57,14 @@ if(isset($_POST['submit'])){
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="">@</span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input name="email" type="email" class="form-control" placeholder="email">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
             </div>
           </div>
         </div>
@@ -92,7 +94,7 @@ if(isset($_POST['submit'])){
       </form>
 
       <p class="mb-0">
-        <a href="register.php" class="text-center">Buat akun baru</a>
+        <a href="index.php" class="text-center">Sudah Punya akun</a>
       </p>
     </div>
     <!-- /.card-body -->

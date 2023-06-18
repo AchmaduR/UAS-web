@@ -1,7 +1,7 @@
 <?php
-    $koneksi = mysqli_connect('localhost','root','','db_pinjamlab');
+$conn = mysqli_connect('localhost','root','','db_pinjamlab');
 
-    if (!$koneksi) {
-        die("Koneksi Gagal: " . mysqli_connect_error());
-    }
+if (!$conn) {
+    die("Koneksi Gagal: " . mysqli_connect_error());
+}
 ?>

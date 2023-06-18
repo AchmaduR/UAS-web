@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2023 at 05:50 PM
+-- Generation Time: Jun 18, 2023 at 06:52 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tb_admin` (
   `id_admin` int(4) NOT NULL,
-  `nama` varchar(35) NOT NULL,
+  `username` varchar(35) NOT NULL,
   `email` varchar(25) NOT NULL,
   `password` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -38,8 +38,9 @@ CREATE TABLE `tb_admin` (
 -- Dumping data for table `tb_admin`
 --
 
-INSERT INTO `tb_admin` (`id_admin`, `nama`, `email`, `password`) VALUES
-(1, '[admin]', '[admin123@gmail.com]', '[admin123]');
+INSERT INTO `tb_admin` (`id_admin`, `username`, `email`, `password`) VALUES
+(2, 'admin', 'admin@gmail.com', '202cb962ac59075b964b07152'),
+(3, 'ant', 'ant@gmail.com', 'caf1a3dfb505ffed0d024130f');
 
 --
 -- Indexes for dumped tables
@@ -59,7 +60,7 @@ ALTER TABLE `tb_admin`
 -- AUTO_INCREMENT for table `tb_admin`
 --
 ALTER TABLE `tb_admin`
-  MODIFY `id_admin` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_admin` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
